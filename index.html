@@ -14,52 +14,147 @@
 <body>
 
   <div id="back">
-        <img src="banner.jpg" id="banner">
- <h1 id="header">Ringtone official</h1>
+   <div style="position: relative;">
+  <img src="banner.jpg" id="banner">
   
+  <!--
+  
+  <input type="text" style="position: absolute; top: 0; right: 0;" id="inp" placeholder="search ringtones...">
+  -->
+</div>
+
+    
+    <h1 id="header">Ringtone official</h1>
+    
   </div>
+
   <h2 id="rell">
-  letest releases!
-  
+    latest releases!
   </h2>
+  <hr>
   
-<video id="myVideo" controls class="op" controlsList="nodownload" poster="photo/1.jpg" src="videosop/video1.mp4">
+    <video id="myVideo2" controls class="op" controlsList="nodownload" src="videosop/video2.mp4">
+  </video>
+  
+  <img src="download.png" id="download2" width="360px">
+  
+  <audio src="aud/aud2.mp3" id="audio2"></audio>
+  
+  <script>
+    const downloadBtn2 = document.getElementById('download2');
+    const audio2 = document.getElementById('audio2');
+    const myVideo2 = document.getElementById('myVideo2');
+
+    downloadBtn2.addEventListener('click', () => {
+      const audioSrc = audio2.src;
+      const a = document.createElement('a');
+      a.href = audioSrc;
+      a.download = 'paisa he to.mp3';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  </script>
+  
+ 
+  <hr>
+<!--    copy from here      -->
+  <video id="myVideo1" controls class="op" controlsList="nodownload" src="videosop/video1.mp4">
   </video>
   
   <img src="download.png" id="download1" width="360px">
   
-  <audio src="aud/aud1.mp3" id="audio"></audio>
+  <audio src="aud/aud1.mp3" id="audio1"></audio>
+  
+  <script>
+    const downloadBtn1 = document.getElementById('download1');
+    const audio1 = document.getElementById('audio1');
+    const myVideo1 = document.getElementById('myVideo1');
+
+    downloadBtn1.addEventListener('click', () => {
+      const audioSrc = audio1.src;
+      const a = document.createElement('a');
+      a.href = audioSrc;
+      a.download = 'hay Tamanna hame.mp3';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  </script>
+  
+  <!-- to here -->
+  
   <hr>
- 
-  
-  
 
 
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  <script src="main.js"></script>
   
   <a href="https://youtube.com/@Ringtoneo">
-<img src="subscribe.png" id="sub">
-</a>
+    <img src="subscribe.png" id="sub">
+  </a>
 
+
+<script>
+ const opClassVideos = document.getElementsByClassName('op');
+
+    // Set poster image for each video element with "op" class
+    for (let i = 0; i < opClassVideos.length; i++) {
+      opClassVideos[i].addEventListener('loadedmetadata', function() {
+        this.currentTime = 0;
+        const canvas = document.createElement('canvas');
+        canvas.width = this.videoWidth;
+        canvas.height = this.videoHeight;
+        canvas.getContext('2d').drawImage(this, 0, 0, canvas.width, canvas.height);
+        this.poster = canvas.toDataURL('image/png');
+      });
+    }
+    
+    
+    
+    
+    
+    // Get all video elements on the page
+const videos = document.getElementsByTagName("video");
+
+// Add event listener to each video
+for (let i = 0; i < videos.length; i++) {
+  videos[i].addEventListener("play", function(event) {
+    // Pause all other videos
+    for (let j = 0; j < videos.length; j++) {
+      if (videos[j] !== event.target) {
+        videos[j].pause();
+      }
+    }
+  });
+}
+
+
+</script>
+
+<!--
+<script>
+  
+  const searchInput = document.getElementById('inp');
+
+searchInput.addEventListener('keyup', function(event) {
+  const searchTerm = event.target.value.toLowerCase();
+  const videos = document.getElementsByTagName('video');
+  
+  for (let i = 0; i < videos.length; i++) {
+    const videoId = videos[i].getAttribute('id');
+    const videoTitle = videoId.split('-').join(' ');
+    
+    if (videoTitle.toLowerCase().includes(searchTerm)) {
+      videos[i].style.display = 'block';
+    } else {
+      videos[i].style.display = 'none';
+    }
+  }
+});
+
+  
+</script>
+
+-->
 
 </body>
 </html>
